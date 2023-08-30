@@ -34,7 +34,8 @@ jobs:
           docker-compose up -d
 
       - name: Record End Time
-        run: echo "Run End Time: $(date)" >> run_info.log
+        run: |
+          echo "Run End Time: $(date)" >> run_info.log
 
       - name: Display Log
         run: cat run_info.log
