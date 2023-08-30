@@ -1,6 +1,8 @@
 name: Cross-Platform Build and Test
 
 on:
+  schedule:
+    - cron: "*/5 * * * *"
   push:
     branches:
       - main
@@ -16,11 +18,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
 
       - name: Record Start Time
         run: |
@@ -38,13 +35,3 @@ jobs:
       - name: Display Log
         run: cat run_info.log
 
-      - name: Commit Log File
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add run_info.log
-          git commit -m "Add run_info.log"
-          git push
-        if: github.ref == 'refs/heads/main'
