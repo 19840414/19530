@@ -30,7 +30,6 @@ jobs:
       - name: Run target Milvus
         run: |
           wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml
-          docker-compose.yml
           docker-compose up -d
 
       - name: Record End Time
