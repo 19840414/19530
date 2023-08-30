@@ -1,0 +1,49 @@
+name: Cross-Platform Build and Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+        
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Record Start Time
+        run: |
+          echo "Run Start Time: $(date)" >> run_info.log
+          echo "Runner OS: ${{ matrix.os }}" >> run_info.log
+
+      - name: Run target Milvus
+        run: |
+          wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml
+          docker-compose.yml
+          docker-compose up -d
+
+      - name: Record End Time
+        run: echo "Run End Time: $(date)" >> run_info.log
+
+      - name: Display Log
+        run: cat run_info.log
+
+      - name: Commit Log File
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add run_info.log
+          git commit -m "Add run_info.log"
+          git push
+        if: github.ref == 'refs/heads/main'
