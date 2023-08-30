@@ -26,7 +26,7 @@ jobs:
 
       - name: Run target Milvus
         run: |
-          docker pull milvusdb/milvus:master-latest
+          docker pull milvusdb/milvus:v2.3.0
 
       - name: Record End Time
         run: |
