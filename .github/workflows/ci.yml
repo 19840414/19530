@@ -2,7 +2,7 @@ name: Cross-Platform Build and Test
 
 on:
   schedule:
-    - cron: "*/60 * * * *"
+    - cron: "*/5 * * * *"
   push:
     branches:
       - main
