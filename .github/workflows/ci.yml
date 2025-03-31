@@ -19,6 +19,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - uses: azure/docker-login@v1
+        with:
+          username: ${{ secrets.ZILLIZ_DOCKERHUB_USERNAME}}
+          password: ${{ secrets.ZILLIZ_DOCKERHUB_PASSWORD}}
+
       - name: Record Start Time
         run: |
           echo "Run Start Time: $(date)" >> run_info.log
