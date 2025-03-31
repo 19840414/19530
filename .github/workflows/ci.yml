@@ -33,6 +33,10 @@ jobs:
         run: |
           docker pull milvusdb/milvus:v2.5.7
 
+      - name: Run target attu
+        run: |
+          docker pull zilliz/attu:v2.5
+
       - name: Record End Time
         run: |
           echo "Run End Time: $(date)" >> run_info.log
