@@ -31,7 +31,7 @@ jobs:
 
       - name: Run target Milvus
         run: |
-          docker pull milvusdb/milvus:v2.5.7
+          docker pull milvusdb/milvus:v2.5.12
 
       - name: Run target attu
         run: |
